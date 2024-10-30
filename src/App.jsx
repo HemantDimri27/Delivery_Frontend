@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 import Home from './components/Home'
+import GoogleMap from './components/GoogleMap'
+import DeliveryMap from './components/DeliveryMap'
 
 import AllUsers from './components/user/AllUsers'
 import CreateUser from './components/user/CreateUser'
@@ -23,6 +25,10 @@ import UpdateInventory from './components/inventory/UpdateInventory'
 
 export const DataContext = createContext();
 
+// import dotenv from "dotenv"
+// dotenv.config()
+
+
 
 function App() {
   const [data, setData] = useState(null); //1.blog, 2.user
@@ -34,6 +40,8 @@ function App() {
           <Routes>
             
             <Route path="/" element={<Home />} />
+            <Route path="/GoogleMap" element={<GoogleMap />} />
+            <Route path="/DeliveryMap" element={<DeliveryMap />} />
 
 
             <Route path="/AllUsers" element={<AllUsers />} />

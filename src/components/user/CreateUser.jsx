@@ -84,7 +84,7 @@ const CreateUser = () => {
   return (
     <div style={styles.body}>
       <div style={styles.formContainer}>
-        <h2 style={styles.formTitle}>Register</h2>
+        <h2 style={styles.formTitle}>Create User</h2>
         <form onSubmit={handleSubmit}>
           <div style={styles.formGroup}>
             <label style={styles.label} htmlFor="name">Name</label>
@@ -106,7 +106,7 @@ const CreateUser = () => {
             <label style={styles.label} htmlFor="password">Password</label>
             <input style={styles.input} type="password" id="password" placeholder="Enter your password" name="password" value={formData.password} onChange={handleChange} required />
           </div>
-          <button type="submit" style={styles.button}>Register</button>
+          <button type="submit" style={styles.button}>Create</button>
         </form>
 
         {/* Show response message */}

@@ -50,13 +50,15 @@ function Home() {
         </div>
 
 
-        <div className='Result' style={styles.subContainer}>Welcome</div>
-        <Link to="/GoogleMap" style={{ textDecoration: 'none' }}>
-          <button style={styles.button}>GoogleMap</button>
-        </Link>
-        <Link to="/DeliveryMap" style={{ textDecoration: 'none' }}>
-          <button style={styles.button}>DeliveryMap</button>
-        </Link>
+        <div className='Result' style={styles.subContainer}>
+          <h1>Welcome</h1>
+          <Link to="/GoogleMap" style={{ textDecoration: 'none' }}>
+            <button style={styles.button}>GoogleMap</button>
+          </Link>
+          <Link to="/DeliveryMap" style={{ textDecoration: 'none' }}>
+            <button style={styles.button}>DeliveryMap</button>
+          </Link>
+        </div>
 
 
         <div className='inventorys' style={styles.subContainer}>

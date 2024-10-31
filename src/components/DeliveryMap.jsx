@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { LoadScript, GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
+import axios from 'axios';
 
 const DeliveryMap = () => {
   const center = { lat: 12.9716, lng: 77.5946 }; // Center of Bangalore
+
+  const [customers, setCustomers] = useState([]);
+  const [inventory, setInventory] = useState([]);
+
   
-  // Inventory locations (starting and ending points)
-  const inventory1 = { lat: 12.9719, lng: 77.6412 }; // Inventory 1 (Start point)
-  const inventory2 = { lat: 12.9260, lng: 77.6762 }; // Inventory 2 (End point)
-  
-  // Customer locations
-  const customers = [
-    { lat: 12.9352, lng: 77.6245 },
-    { lat: 12.9565, lng: 77.7010 },
-    { lat: 12.9818, lng: 77.6361 },
-    { lat: 12.9304, lng: 77.6787 },
-    { lat: 12.9102, lng: 77.5869 },
-    { lat: 12.9990, lng: 77.6431 },
-    { lat: 12.9081, lng: 77.6512 },
-    { lat: 12.9652, lng: 77.6101 },
-    { lat: 12.9832, lng: 77.6963 },
-    { lat: 12.9489, lng: 77.6055 }
-  ];
+  useEffect(() => {
+    // fetch data of inventoty
+    axios.get('/api/delivery/allInventory')
+      .then(res => {
+        const inventoryCoords = res.data.map(user => ({
+          lat: user.coordinates.latitude,
+          lng: user.coordinates.longitude
+        }));
+        setInventory(inventoryCoords);
+      })
+    
+    // fetch data of users
+    axios.get('/api/delivery/allUsers')
+      .then(res => {
+        const customerCoords = res.data.map(user => ({
+          lat: user.coordinates.latitude,
+          lng: user.coordinates.longitude
+        }));
+        setCustomers(customerCoords);
+      })
+      
+  }, []);
+
+
+
+  const [inventory1, inventory2] = inventory;  // destructured
+
+
 
   const [directions, setDirections] = useState(null);
 

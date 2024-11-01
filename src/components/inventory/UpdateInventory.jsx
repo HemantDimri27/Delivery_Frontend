@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const UpdateInventory = () => {
   const [formData, setFormData] = useState({
     name: '',
-    capacity: '',
+    capacity: null,
     coordinates: { latitude: null, longitude: null },
   });
 

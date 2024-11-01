@@ -10,26 +10,32 @@ const DeliveryMap = () => {
 
   
   useEffect(() => {
-    // fetch data of inventoty
-    axios.get('/api/delivery/allInventory')
-      .then(res => {
-        const inventoryCoords = res.data.map(user => ({
-          lat: user.coordinates.latitude,
-          lng: user.coordinates.longitude
-        }));
-        setInventory(inventoryCoords);
-      })
-    
-    // fetch data of users
-    axios.get('/api/delivery/allUsers')
-      .then(res => {
-        const customerCoords = res.data.map(user => ({
-          lat: user.coordinates.latitude,
-          lng: user.coordinates.longitude
-        }));
-        setCustomers(customerCoords);
-      })
+    try {
+      const token = localStorage.getItem('jwtToken');
+
+      // fetch data of inventoty
+      axios.get('/api/delivery/allInventory', { headers: {Authorization: `Bearer ${token}`}})
+        .then(res => {
+          const inventoryCoords = res.data.map(user => ({
+            lat: user.coordinates.latitude,
+            lng: user.coordinates.longitude
+          }));
+          setInventory(inventoryCoords);
+        })
       
+      // fetch data of users
+      axios.get('/api/delivery/allUsers', { headers: {Authorization: `Bearer ${token}`}})
+        .then(res => {
+          const customerCoords = res.data.map(user => ({
+            lat: user.coordinates.latitude,
+            lng: user.coordinates.longitude
+          }));
+          setCustomers(customerCoords);
+        })
+        
+    } catch (error) {
+      console.log(`error in Delevry map : ${error}`)
+    }
   }, []);
 
 

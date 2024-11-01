@@ -19,12 +19,17 @@ const DeleteInventory = () => {
   }
 
   const handleSubmit = async(event) => {
-    event.preventDefault();
-    const response = await axios.post('/api/delivery/deleteInventory', formData)
-    console.log(response)
-    setResponseMessage(response.data); 
-    if(response.data.charAt(0) === 'U')
-    setIsLogined(true);
+    try {
+      event.preventDefault();
+      const token = localStorage.getItem('jwtToken');
+      const response = await axios.post('/api/delivery/deleteInventory', formData, { headers: {Authorization: `Bearer ${token}`}})
+      console.log(response)
+      setResponseMessage(response.data); 
+      if(response.data.charAt(0) === 'U')
+      setIsLogined(true);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   

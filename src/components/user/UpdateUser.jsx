@@ -56,7 +56,8 @@ const UpdateUser = () => {
     }
 
     try {
-      const response = await axios.post('/api/delivery/updateUser', formData);
+      const token = localStorage.getItem('jwtToken');
+      const response = await axios.post('/api/delivery/updateUser', formData , { headers: {Authorization: `Bearer ${token}`}});
       setResponseMessage(response.data);
 
       if(response.data.charAt(0) === 'U')

@@ -53,7 +53,8 @@ const UpdateInventory = () => {
     }
 
     try {
-      const response = await axios.post('/api/delivery/updateInventory', formData);
+      const token = localStorage.getItem('jwtToken');
+      const response = await axios.post('/api/delivery/updateInventory', formData, { headers: {Authorization: `Bearer ${token}`}});
       setResponseMessage(response.data);
 
       if(response.data.charAt(0) === 'I')

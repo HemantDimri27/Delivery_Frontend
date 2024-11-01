@@ -7,10 +7,15 @@ const AllUsers = () => {
   const [users, setUsers] = useState([])
 
   useEffect(()=>{
-    axios.get('/api/delivery/allUsers')                      // proxy
-    .then((res)=>{
-      setUsers(res.data)
-    })
+    try {
+      const token = localStorage.getItem('jwtToken');
+      axios.get('/api/delivery/allUsers', { headers: {Authorization: `Bearer ${token}`}})                      
+      .then((res)=>{
+        setUsers(res.data)
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }, [])
 
 

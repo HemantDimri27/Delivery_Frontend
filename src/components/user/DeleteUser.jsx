@@ -21,7 +21,8 @@ const DeleteUser = () => {
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    const response = await axios.post('/api/delivery/deleteUser', formData)
+    const token = localStorage.getItem('jwtToken');
+    const response = await axios.post('/api/delivery/deleteUser', formData , { headers: {Authorization: `Bearer ${token}`}})
     console.log(response)
     setResponseMessage(response.data); 
     if(response.data.charAt(0) === 'U')

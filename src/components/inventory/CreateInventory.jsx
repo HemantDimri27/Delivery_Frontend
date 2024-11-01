@@ -53,7 +53,8 @@ const CreateInventory = () => {
     }
 
     try {
-      const response = await axios.post('/api/delivery/createInventory', formData);
+      const token = localStorage.getItem('jwtToken');
+      const response = await axios.post('/api/delivery/createInventory', formData , { headers: {Authorization: `Bearer ${token}`}});
       setResponseMessage(response.data);
 
       if(response.data.charAt(0) === 'I')

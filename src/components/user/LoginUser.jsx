@@ -21,11 +21,23 @@ const LoginUser = () => {
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    const response = await axios.post('/api/delivery/loginUser', formData)
-    console.log(response)
-    setResponseMessage(response.data); 
-    if(response.data.charAt(0) === 'U')
-    setIsLogined(true);
+    try {
+      const response = await axios.post('/api/delivery/loginUser', formData)
+      const { message, token } = response.data;
+  
+      if (token) {
+        localStorage.setItem('jwtToken', token); 
+        console.log("Token saved successfully");
+      } else {
+        console.log("No token received from the server");
+      }
+  
+      setResponseMessage(message); 
+      // if(response.data.charAt(0) === 'U')
+      setIsLogined(true);
+    } catch (error) {
+      console.log(`error : ${error}`);
+    }
   }
 
   

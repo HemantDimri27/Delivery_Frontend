@@ -7,10 +7,15 @@ const AllInventory = () => {
   const [users, setUsers] = useState([])
 
   useEffect(()=>{
-    axios.get('/api/delivery/allInventory')                      
-    .then((res)=>{
-      setUsers(res.data)
-    })
+    try {
+      const token = localStorage.getItem('jwtToken');
+      axios.get('/api/delivery/allInventory', { headers: {Authorization: `Bearer ${token}`}})                      
+      .then((res)=>{
+        setUsers(res.data)
+      })
+    } catch (error) {
+      console.log(`Error Allinventory : ${error}`);
+    }
   }, [])
 
 

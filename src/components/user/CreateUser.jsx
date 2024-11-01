@@ -92,7 +92,7 @@ const CreateUser = () => {
           </div>
           <div style={styles.formGroup}>
             <label style={styles.label} htmlFor="mobile">Mobile</label>
-            <input style={styles.input} type="text" id="mobile" placeholder="Enter your mobile" name="mobile" value={formData.mobile} onChange={handleChange} required />
+            <input style={styles.input} type="number" id="mobile" placeholder="Enter your mobile" name="mobile" value={formData.mobile} onChange={handleChange} required />
           </div>
           <div style={styles.formGroup}>
             <label style={styles.label} htmlFor="address">Address</label>
